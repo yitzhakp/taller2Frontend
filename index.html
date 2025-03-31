@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Lista de tareas</h1>
+    </header>
+    <main>
+        <form id="task-form" onsubmit="addTask(event)">
+            <input type="text" id="task-input" placeholder="Escribe una tarea" required>
+            <label for="task-completed">Estado:</label>
+            <input type="checkbox" id="task-completed">
+            <button type="submit">Agregar</button>
+            <label for="task-completed">Estado:</label>
+            <select id="taskShow" onchange="showTasks()">
+                <option value="all">Todas</option>
+                <option value=true>Completadas</option>
+                <option value=false>Incompletas</option>
+            </select>
+        </form>
+        <ul id="task-list">
+            <!-- Las tareas se agregarán aquí dinámicamente -->
+        </ul>
+
+        <p>Este fromulario aparecer cuando se de click en algun editar</p>
+        <form id="task-edit-form">
+            <input type="text" id="task-edit" placeholder="Escribe una tarea" required>
+            <label for="task-completed-edit">Estado:</label>
+            <input type="checkbox" id="task-completed-edit">
+            <button type="submit" id="submitEdit">Guardar</button>
+        </form>
+
+    </main>
+</body>
+<script src="index.js"></script>
+
+</html>
