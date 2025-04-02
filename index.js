@@ -17,16 +17,21 @@ const createTaskLi = (element) => {
 }
 
 const changeSaveButton = (id) => {
+    const editForm = document.getElementById('task-edit-form');
+    editForm.classList.add('show'); // Mostrar el formulario
+    
     const inputTitle = document.getElementById('task-edit');
     const task = JSON.parse(localStorage.getItem(id));
     inputTitle.value = task.title;
+    
     const inputCompleted = document.getElementById('task-completed-edit');
     inputCompleted.checked = task.completed;
-    const taskForm = document.getElementById('task-edit-form');
-
-    const saveButton = document.getElementById(`submitEdit`);
-    taskForm.setAttribute('onsubmit', `editTask(event, ${id})`);
-}
+    
+    editForm.setAttribute('onsubmit', `editTask(event, ${id})`);
+    
+    // Hacer scroll suave al formulario
+    editForm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
 
 const editTask = async (event, id) => {
     event.preventDefault();

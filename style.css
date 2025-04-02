@@ -1,160 +1,348 @@
-/* Estilos generales */
-* {
-    box-sizing: border-box;
+/* Estilos mejorados para Lista de Tareas */
+:root {
+    /* Colores */
+    --primary: #4361ee;
+    --primary-dark: #3a0ca3;
+    --secondary: #4895ef;
+    --accent: #4cc9f0;
+    --light: #f8f9fa;
+    --dark: #212529;
+    --success: #4cc9f0;
+    --danger: #f72585;
+    --danger-dark: #b5179e;
+    --gray: #6c757d;
+    --gray-dark: #495057;
+    
+    /* Bordes */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-full: 50px;
+    
+    /* Sombras */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    
+    /* Transiciones */
+    --transition: all 0.3s ease;
+  }
+  
+  * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-body {
-    background-color: #f4f4f4;
-    color: #333;
-    padding: 2rem;
-}
-
-/* Encabezado */
-header {
+  }
+  
+  body {
+    background-color: #f5f7fa;
+    color: var(--dark);
+    line-height: 1.6;
+    padding: 0;
+  }
+  
+  /* Header */
+  header {
+    background: white;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-md);
     text-align: center;
     margin-bottom: 2rem;
-}
-
-header h1 {
-    font-size: 2.5rem;
-    color: #4CAF50;
-}
-
-/* Contenedor principal */
-main {
-    max-width: 600px;
-    margin: auto;
-    background: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  h1 {
+    color: var(--primary);
+    font-size: 2rem;
+  }
+  
+  /* Main content */
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1.5rem 2rem;
+  }
+  
+  /* Formularios */
+  #task-form, #task-edit-form {
+    background: white;
+    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    margin-bottom: 2rem;
     display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-/* Formulario de agregar tarea */
-form#task-form {
-    display: grid;
-    grid-template-columns: 1fr auto auto auto;
-    gap: 0.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
     align-items: center;
-}
-
-form#task-form input[type="text"] {
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-form#task-form select,
-form#task-form input[type="checkbox"],
-form#task-form button {
-    padding: 0.5rem;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-}
-
-form#task-form button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-form#task-form button:hover {
-    background-color: #45a049;
-}
-
-/* Lista de tareas */
-ul#task-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-/* Cada tarea */
-ul#task-list li {
-    background: #f9f9f9;
+  }
+  
+  #task-edit-form {
+    display: none;
+    margin-top: 1rem;
+  }
+  
+  #task-input, #task-edit {
+    flex: 1;
+    min-width: 200px;
     padding: 0.75rem 1rem;
     border: 1px solid #ddd;
-    border-radius: 6px;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    transition: var(--transition);
+  }
+  
+  #task-input:focus, #task-edit:focus {
+    outline: none;
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 3px rgba(72, 149, 239, 0.2);
+  }
+  
+  /* Checkboxes */
+  #task-completed, #task-completed-edit {
+    width: 20px;
+    height: 20px;
+    appearance: none;
+    border: 2px solid #ddd;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    position: relative;
+    transition: var(--transition);
+  }
+  
+  #task-completed:checked, #task-completed-edit:checked {
+    background-color: var(--success);
+    border-color: var(--success);
+  }
+  
+  #task-completed:checked::after, #task-completed-edit:checked::after {
+    content: "✓";
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+  }
+  
+  /* Select */
+  #taskShow {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: var(--radius-md);
+    background-color: white;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  /* Botones */
+  #task-form button, #submitEdit {
+    padding: 0.75rem 1.5rem;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  
+  #task-form button:hover, #submitEdit:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+  }
+  
+  /* Lista de tareas */
+  #task-list {
+    list-style: none;
+  }
+  
+  #task-list li {
+    background: white;
+    padding: 1rem 1.5rem;
+    margin-bottom: 0.75rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
     display: flex;
-    justify-content: space-between;
     align-items: center;
-}
-
-/* Tarea completada */
-.completed {
+    justify-content: space-between;
+    gap: 1rem;
+    transition: var(--transition);
+  }
+  
+  #task-list li:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  #task-list li p {
+    flex: 1;
+    margin: 0;
+    word-break: break-word;
+  }
+  
+  #task-list li.completed p {
     text-decoration: line-through;
-    color: gray;
-}
-
-/* Botones dentro de tareas */
-.task-actions {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.task-actions button {
-    padding: 0.3rem 0.6rem;
+    color: var(--gray);
+  }
+  
+  /* Botones en lista */
+  #task-list li button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: var(--radius-md);
+    color: white;
     font-size: 0.9rem;
-    border: none;
-    border-radius: 4px;
     cursor: pointer;
-}
-
-.task-actions .complete-btn {
-    background-color: #2196F3;
-    color: white;
-}
-
-.task-actions .edit-btn {
-    background-color: #FFC107;
-    color: white;
-}
-
-.task-actions .delete-btn {
-    background-color: #f44336;
-    color: white;
-}
-
-/* Formulario de edición */
-form#task-edit-form {
-    display: none; /* Oculto por defecto, se muestra solo al editar */
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-}
-
-form#task-edit-form input[type="text"],
-form#task-edit-form input[type="checkbox"],
-form#task-edit-form button {
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-form#task-edit-form button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-    form#task-form {
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto auto;
+    transition: var(--transition);
+  }
+  
+  #task-list li button.delete {
+    background-color: var(--danger);
+  }
+  
+  #task-list li button.delete:hover {
+    background-color: var(--danger-dark);
+  }
+  
+  #task-list li button.edit {
+    background-color: var(--accent);
+  }
+  
+  #task-list li button.edit:hover {
+    background-color: var(--secondary);
+  }
+  
+  /* Mensaje del formulario de edición */
+  main > p {
+    text-align: center;
+    color: var(--gray);
+    margin: 1rem 0;
+    font-size: 0.9rem;
+  }
+  
+  /* Responsive */
+  @media (max-width: 600px) {
+    #task-form, #task-edit-form {
+      flex-direction: column;
+      align-items: stretch;
     }
-
+    
+    #task-list li {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+    
     .task-actions {
-        flex-direction: column;
+      align-self: flex-end;
     }
-}
+  }
+  
+  /* Animación para nuevas tareas */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  #task-list li {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  /* Estilos específicos para el formulario de edición */
+#task-edit-form {
+    display: none; /* Oculto por defecto */
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    margin: 2rem auto;
+    max-width: 600px;
+    border: 1px solid rgba(72, 149, 239, 0.2);
+    animation: slideUp 0.4s ease-out forwards;
+  }
+  
+  #task-edit-form.show {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  #task-edit {
+    flex: 1;
+    min-width: 200px;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    transition: var(--transition);
+    background-color: #f8fafc;
+  }
+  
+  #task-edit:focus {
+    outline: none;
+    border-color: var(--accent);
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(76, 201, 240, 0.3);
+  }
+  
+  #task-completed-edit {
+    width: 20px;
+    height: 20px;
+    margin-right: 0.5rem;
+  }
+  
+  #submitEdit {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.8rem;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: var(--transition-bounce);
+    box-shadow: var(--shadow-sm);
+  }
+  
+  #submitEdit:hover {
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  #submitEdit:active {
+    transform: scale(0.98);
+  }
+  
+  /* Animación para el formulario de edición */
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Estilos para el mensaje informativo */
+  main > p {
+    text-align: center;
+    color: var(--gray);
+    margin: 1rem 0;
+    font-size: 0.9rem;
+    font-style: italic;
+    opacity: 0.8;
+    transition: var(--transition);
+  }
+  
+  /* Cuando el formulario de edición está visible */
+  #task-edit-form.show + p {
+    opacity: 0;
+    height: 0;
+    margin: 0;
+    overflow: hidden;
+  }
