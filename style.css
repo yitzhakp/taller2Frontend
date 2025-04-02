@@ -1,0 +1,160 @@
+/* Estilos generales */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f4f4;
+    color: #333;
+    padding: 2rem;
+}
+
+/* Encabezado */
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    color: #4CAF50;
+}
+
+/* Contenedor principal */
+main {
+    max-width: 600px;
+    margin: auto;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Formulario de agregar tarea */
+form#task-form {
+    display: grid;
+    grid-template-columns: 1fr auto auto auto;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+form#task-form input[type="text"] {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form#task-form select,
+form#task-form input[type="checkbox"],
+form#task-form button {
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+form#task-form button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+form#task-form button:hover {
+    background-color: #45a049;
+}
+
+/* Lista de tareas */
+ul#task-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* Cada tarea */
+ul#task-list li {
+    background: #f9f9f9;
+    padding: 0.75rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Tarea completada */
+.completed {
+    text-decoration: line-through;
+    color: gray;
+}
+
+/* Botones dentro de tareas */
+.task-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.task-actions button {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.task-actions .complete-btn {
+    background-color: #2196F3;
+    color: white;
+}
+
+.task-actions .edit-btn {
+    background-color: #FFC107;
+    color: white;
+}
+
+.task-actions .delete-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+/* Formulario de edición */
+form#task-edit-form {
+    display: none; /* Oculto por defecto, se muestra solo al editar */
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+form#task-edit-form input[type="text"],
+form#task-edit-form input[type="checkbox"],
+form#task-edit-form button {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form#task-edit-form button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    form#task-form {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
+    }
+
+    .task-actions {
+        flex-direction: column;
+    }
+}
