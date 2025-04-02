@@ -60,6 +60,8 @@ const editTask = async (event, id) => {
                 tasklist.removeChild(li);
             }
         })
+        const editForm = document.getElementById('task-edit-form');
+        editForm.classList.remove('show'); // Mostrar el formulario
 }
 
 
@@ -69,13 +71,18 @@ const showTasks = async () => {
     tasklist.innerHTML = '';
     for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
-        const element = JSON.parse(localStorage.getItem(key));
-        const toShow = document.getElementById('taskShow').value;
-        console.log(element.completed, toShow);
-        
-        if (toShow == "all" || String(element.completed) == toShow) {
-            const li = createTaskLi(element);
-            tasklist.appendChild(li);
+        try {
+            const element = JSON.parse(localStorage.getItem(key));
+            const toShow = document.getElementById('taskShow').value;
+            console.log(element.completed, toShow);
+            
+            if (toShow == "all" || String(element.completed) == toShow) {
+                const li = createTaskLi(element);
+                tasklist.appendChild(li);
+            }
+        }catch{
+            console.log("");
+            
         }
     }
 }
@@ -85,7 +92,9 @@ const addTask = async (event) => {
     const title = document.getElementById('task-input').value;
     const completed = document.getElementById('task-completed').checked;
     const form = document.getElementById('task-form');
+    const toShow = document.getElementById('taskShow').value;
     form.reset();
+    document.getElementById('taskShow').value = toShow;
     fetch('http://localhost:3000/tasks', {
         method: 'POST',
         headers: {
@@ -96,9 +105,11 @@ const addTask = async (event) => {
         .then(response => response.json())
         .then(element => {
             localStorage.setItem(element.id, JSON.stringify(element));
-            const tasklist = document.getElementById('task-list');
-            const li = createTaskLi(element);
-            tasklist.appendChild(li);
+            if (toShow == "all" || String(element.completed) == toShow) {
+                const tasklist = document.getElementById('task-list');
+                const li = createTaskLi(element);
+                tasklist.appendChild(li);
+            }
         })
 }
 
